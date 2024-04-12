@@ -1,0 +1,34 @@
+# Override Recovery Service so that we can control start by us
+service recovery /system/bin/recovery
+    override
+    socket recovery stream 422 system system
+    seclabel u:r:recovery:s0
+    disabled
+
+# Define for load all second stage kernel modules
+service vendor.modprobe /vendor/bin/vendor_modprobe.sh
+    class main
+    user root
+    group root system
+    disabled
+    stdio_to_kmsg
+    seclabel u:r:vendor_modprobe:s0
+    oneshot
+
+# preinit should only run once
+service car_diag_preinit  /system/bin/system_diag_car_init
+    seclabel u:r:recovery:s0
+    oneshot
+    disabled
+
+# run system_diag_pre_init if ro.boot.enter_car_diag=1
+on boot && property:ro.boot.enter_car_diag=1
+    start car_diag_preinit
+    stop logd
+
+on boot && property:ro.boot.enter_car_diag=0
+    start recovery
+
+# start recovery if abl return nothing
+on boot && property:ro.boot.enter_car_diag=
+    start recovery
