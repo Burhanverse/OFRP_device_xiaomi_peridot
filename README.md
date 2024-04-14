@@ -1,4 +1,4 @@
-# Android device tree for Redmi 24069RA21C (peridot)
+# TWRP tree for Redmi Turbo 3 | POCO F6 (peridot)
 
 ```
 #
