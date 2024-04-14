@@ -6,9 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_peridot.mk
+    $(LOCAL_DIR)/twrp_peridot.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_peridot-user \
-    omni_peridot-userdebug \
-    omni_peridot-eng
+    twrp_peridot-user \
+    twrp_peridot-userdebug \
+    twrp_peridot-eng
