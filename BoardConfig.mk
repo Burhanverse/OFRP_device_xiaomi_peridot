@@ -93,6 +93,9 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
+# Workaround for error copying vendor files to recovery ramdisk
+TARGET_COPY_OUT_VENDOR := vendor
+
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
