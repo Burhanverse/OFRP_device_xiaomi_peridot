@@ -1,29 +1,28 @@
 #
-# Copyright (C) 2024 The Android Open Source Project
-# Copyright (C) 2024 SebaUbuntu's TWRP device tree generator
+# Copyright (C) 2023 The Android Open Source Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+DEVICE_PATH := device/xiaomi/peridot
 
-# Inherit some common twrp stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+# Inherit from device.mk configuration
+$(call inherit-product, $(DEVICE_PATH)/device.mk)
 
-# Inherit from peridot device
-$(call inherit-product, device/xiaomi/peridot/device.mk)
+# Release name
+PRODUCT_RELEASE_NAME := peridot
 
+## Device identifier
 PRODUCT_DEVICE := peridot
 PRODUCT_NAME := twrp_peridot
-PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := 24069RA21C
-PRODUCT_MANUFACTURER := xiaomi
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := RedmiTurbo3
+PRODUCT_MANUFACTURER := Xiaomi
 
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+# Assert
+TARGET_OTA_ASSERT_DEVICE := peridot
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="peridot-user 14 UKQ1.240116.001 V816.0.6.0.UNPCNXM release-keys"
-
-BUILD_FINGERPRINT := Redmi/peridot/peridot:14/UKQ1.240116.001/V816.0.6.0.UNPCNXM:user/release-keys
+# Theme
+TW_STATUS_ICONS_ALIGN := center
+TW_Y_OFFSET := 99
+TW_H_OFFSET := -99

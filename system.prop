@@ -1,5 +1,6 @@
-# Battery Property
-ro.charger.enable_suspend=1
+# ADB
+ro.adb.secure=0
+ro.boot.dynamic_partitions=true
 
-# OTG
-persist.sys.isUsbOtgEnabled=true
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true

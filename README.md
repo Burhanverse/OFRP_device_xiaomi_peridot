@@ -1,4 +1,4 @@
-# TWRP tree for Redmi Turbo 3 | POCO F6 (peridot)
+## TWRP tree for Redmi Turbo 3 | POCO F6 (peridot)
 
 ```
 #
