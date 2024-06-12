@@ -5,5 +5,6 @@
 #
 insmod /vendor/lib/modules/1.1/xiaomi_touch.ko
 insmod /vendor/lib/modules/1.1/goodix_core.ko
+insmod /vendor/lib/modules/1.1/focaltech_touch.ko
 exit 0
 #
