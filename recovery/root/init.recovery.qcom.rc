@@ -42,12 +42,20 @@ on fs
     mkdir /tmp/persist 0775 shell system
     mount none /tmp/persist /mnt/vendor/persist bind rec
     install_keyring
-
+    
+service overrideprops /system/bin/overrideprops.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+    
 on init
     start boot-hal-1-2
 
 on boot
     setprop sys.usb.config adb
+    start overrideprops
 
 on property:twrp.modules.loaded=true
     # Mount firmware
