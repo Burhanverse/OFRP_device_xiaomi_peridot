@@ -33,9 +33,9 @@ product                                                 /product               e
 mi_ext                                                  /mi_ext     erofs   ro                                                   wait,slotselect,avb=vbmeta,logical,first_stage_mount,nofail
 vendor                                                  /vendor                erofs   ro                                                   wait,slotselect,avb,logical,first_stage_mount
 odm                                                     /odm                   erofs   ro                                                   wait,slotselect,avb,logical,first_stage_mount
-/dev/block/bootdevice/by-name/metadata                  /metadata              f2fs    noatime,nosuid,nodev,discard                         wait,check,formattable,wrappedkey,first_stage_mount
+/dev/block/bootdevice/by-name/metadata              /metadata              f2fs    noatime,nosuid,nodev,discard                         wait,check,formattable,first_stage_mount
+/dev/block/bootdevice/by-name/persist                   /mnt/vendor/persist    ext4    noatime,nosuid,nodev,barrier=1                       wait,check
+/dev/block/bootdevice/by-name/misc                      /misc                  emmc    defaults                                             defaults
 /dev/block/bootdevice/by-name/userdata                  /data                  f2fs    noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,fsync_mode=nobarrier    latemount,wait,check,formattable,fileencryption=ice,wrappedkey,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128M,sysfs_path=/sys/devices/platform/soc/1d84000.ufshc,checkpoint=fs
-/dev/block/mmcblk0p1                       /sdcard         vfat    nosuid,nodev                                               wait
 /dev/block/bootdevice/by-name/boot         /boot           emmc    defaults                                                   defaults
-/dev/block/bootdevice/by-name/misc         /misc           emmc    defaults                                                   defaults
 /dev/block/bootdevice/by-name/rescue       /cache          ext4    nosuid,noatime,nodev,barrier=1                             wait
