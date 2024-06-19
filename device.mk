@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2024 The Android Open Source Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -37,3 +37,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
+
+# Copy modules for depmod
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*.ko,$(DEVICE_PATH)/prebuilt/modules,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)
