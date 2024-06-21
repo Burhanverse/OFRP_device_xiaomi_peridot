@@ -4,3 +4,6 @@ ro.boot.dynamic_partitions=true
 
 # Battery Property
 ro.charger.enable_suspend=1
+
+# OTG
+persist.sys.isUsbOtgEnabled=true
