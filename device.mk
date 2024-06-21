@@ -37,3 +37,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
+
+# OEM otacerts
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    $(COMMON_PATH)/security/otacert
