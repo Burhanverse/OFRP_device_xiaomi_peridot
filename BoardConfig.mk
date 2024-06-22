@@ -40,24 +40,16 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno740
 QCOM_BOARD_PLATFORMS += xiaomi_sm8550
 #BOARD_USES_QCOM_HARDWARE := true
 
-# Kernel
-BOARD_KERNEL_PAGESIZE         := 4096
-TARGET_KERNEL_ARCH            := arm64
-TARGET_KERNEL_HEADER_ARCH     := arm64
-BOARD_KERNEL_IMAGE_NAME       := Image
-BOARD_BOOT_HEADER_VERSION     := 4
-TARGET_KERNEL_CLANG_COMPILE   := true
-TARGET_PREBUILT_KERNEL        := $(DEVICE_PATH)/prebuilt/kernel_empty
-BOARD_MKBOOTIMG_ARGS          += --header_version $(BOARD_BOOT_HEADER_VERSION)
-BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
-
-# Ramdisk use lz4
+# Kernel/Ramdisk
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
+BOARD_KERNEL_IMAGE_NAME := kernel
 BOARD_RAMDISK_USE_LZ4 := true
+TARGET_PREBUILT_KERNEL := $(COMMON_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 
 # A/B
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
     boot \
@@ -104,6 +96,16 @@ TARGET_COPY_OUT_VENDOR := vendor
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hidl.allocator@1.0 \
+    android.hidl.memory@1.0 \
+    android.hidl.memory.token@1.0 \
+    libdmabufheap \
+    libhidlmemory \
+    libion \
+    libnetutils \
+    libxml2 \
+    vendor.display.config@2.0
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
 # Extras
@@ -122,13 +124,6 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-
-# Tool
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_LIBRESETPROP := true
-TW_INCLUDE_LPDUMP := true
-TW_INCLUDE_LPTOOLS := true
 
 # Debug
 TARGET_USES_LOGD := true
@@ -170,6 +165,23 @@ TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 #TW_NO_SCREEN_BLANK := true
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.allocator@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory.token@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libdmabufheap.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libhidlmemory.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libnetutils.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
+
+# Tool
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_LPDUMP := true
+TW_INCLUDE_LPTOOLS := true
 TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko goodix_core.ko focaltech_touch.ko fts_touch_spi.ko aw882xx_dlkm.ko qti_battery_charger.ko xiaomi_touch.ko hwmon.ko usb_f_ccid.ko usb_f_cdev.ko usb_f_gsi.ko usb_f_qdss.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone48/temp"
