@@ -53,6 +53,14 @@ service overrideprops /system/bin/overrideprops.sh
 on init
     start boot-hal-1-2
 
+service mtpd /system/bin/mtpd
+    class main
+    oneshot
+
+on post-fs-data
+    chmod 0755 /system/bin/mtpd
+    chown root root /system/bin/mtpd
+
 on boot
     setprop sys.usb.config adb
     start overrideprops
