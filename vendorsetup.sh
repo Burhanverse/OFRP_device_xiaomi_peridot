@@ -6,7 +6,7 @@ export FOX_AB_DEVICE=1
 export OF_AB_DEVICE_WITH_RECOVERY_PARTITION=1
 export FOX_BUGGED_AOSP_ARB_WORKAROUND="1546300800"; # Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
 # About 
-export FOX_VERSION=R12.1-$(date +%d.%m.%y)
+export FOX_VERSION=R12.1-$(date +%d.%m.%y-%H.%M.%S)
 export OF_MAINTAINER="Aqua"
 export FOX_BUILD_TYPE="unofficial"
 # Screen configs
